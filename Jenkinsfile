@@ -1,4 +1,4 @@
-pipeline {
+node {
     stage("Code Checkout") { // for display purposes
       // Get some code from a GitHub repository
         steps {
