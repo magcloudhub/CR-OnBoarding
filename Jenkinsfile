@@ -39,5 +39,4 @@ git credentialsId: 'magcloudhub', url: 'https://github.com/magcloudhub/CR-OnBoar
         }
 
     }
-}
 
