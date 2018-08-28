@@ -6,36 +6,24 @@ node {
               }
     
     stage("static code analysis"){
-            steps {
-                withSonarQubeEnv('sonarqube') {
+            withSonarQubeEnv('sonarqube') {
                     sh '/opt/sonar/bin/sonar-scanner -Dsonar.projectKey=ZervOnboarding -Dsonar.sources=api'
                 }
             }
-        }
-
-        stage("build docker image"){
-            steps {
-                sh "docker-compose build"
+   
+    stage("build docker image"){
+            sh "docker-compose build"
             }
-        }
-
-
-        stage("env cleanup"){
-            steps {
-                sh "docker image prune -f"
+ 
+    stage("env cleanup"){
+            sh "docker image prune -f"
             }
-        }
 
-        stage("Launch service"){
-            steps {
-                sh "docker-compose stop"
-                sh "docker-compose up -d"
+    stage("Launch service"){
+            sh "docker-compose stop"
+            sh "docker-compose up -d"
             }
-        }
-
-        stage("Launch Info"){
-            steps {
-                echo "service running on ${ip}"
+  
+    stage("Launch Info"){
+            echo "service running on ${ip}"
             }
-        }
-
