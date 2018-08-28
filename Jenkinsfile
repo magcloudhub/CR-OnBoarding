@@ -1,9 +1,11 @@
 pipeline {
-    stage('Code Checkout') { // for display purposes
+    stage("Code Checkout") { // for display purposes
       // Get some code from a GitHub repository
+        steps {
 git credentialsId: 'magcloudhub', url: 'https://github.com/magcloudhub/CR-OnBoarding.git'
-   }
-
+                           }
+              }
+        }
     stage("static code analysis"){
             steps {
                 withSonarQubeEnv('sonarqube') {
