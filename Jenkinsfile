@@ -1,17 +1,10 @@
 pipeline {
-    agent { label "build" }
-    environment {
-         def ip = sh returnStdout: true, script: 'curl -s http://169.254.169.254/latest/meta-data/public-ipv4'
-    }
+    stage('Code Checkout') { // for display purposes
+      // Get some code from a GitHub repository
+git credentialsId: 'magcloudhub', url: 'https://github.com/magcloudhub/CR-OnBoarding.git'
+   }
 
-    stages {
-        stage("checkout"){
-            steps {
-                checkout scm
-            }
-        }
-
-        stage("static code analysis"){
+    stage("static code analysis"){
             steps {
                 withSonarQubeEnv('sonarqube') {
                     sh '/opt/sonar/bin/sonar-scanner -Dsonar.projectKey=ZervOnboarding -Dsonar.sources=api'
